@@ -1,0 +1,128 @@
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cpu
+Collecting git+https://github.com/openai/CLIP.git
+  Cloning https://github.com/openai/CLIP.git to c:\users\vijay\appdata\local\temp\pip-req-build-m12qbwe4
+  Running command git clone --filter=blob:none --quiet https://github.com/openai/CLIP.git 'C:\Users\Vijay\AppData\Local\Temp\pip-req-build-m12qbwe4'
+  Resolved https://github.com/openai/CLIP.git to commit ded190a052fdf4585bd685cee5bc96e0310d2c93
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting Django==5.0.1
+  Using cached Django-5.0.1-py3-none-any.whl.metadata (4.2 kB)
+Collecting djangorestframework==3.16.1
+  Using cached djangorestframework-3.16.1-py3-none-any.whl.metadata (11 kB)
+Collecting djangorestframework-simplejwt==5.5.1
+  Using cached djangorestframework_simplejwt-5.5.1-py3-none-any.whl.metadata (4.6 kB)
+Collecting django-cors-headers==4.9.0
+  Using cached django_cors_headers-4.9.0-py3-none-any.whl.metadata (16 kB)
+Collecting drf-yasg==1.21.7
+  Using cached drf_yasg-1.21.7-py3-none-any.whl.metadata (16 kB)
+Collecting gunicorn==23.0.0
+  Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting python-dotenv==1.2.1
+  Using cached python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+Collecting Pillow
+  Using cached pillow-12.1.1-cp313-cp313-win_amd64.whl.metadata (9.0 kB)
+Collecting numpy
+  Using cached numpy-2.4.2-cp313-cp313-win_amd64.whl.metadata (6.6 kB)
+Collecting faiss-cpu
+  Downloading faiss_cpu-1.13.2-cp313-cp313-win_amd64.whl.metadata (7.6 kB)
+Collecting ftfy
+  Downloading ftfy-6.3.1-py3-none-any.whl.metadata (7.3 kB)
+Collecting regex
+  Downloading regex-2026.1.15-cp313-cp313-win_amd64.whl.metadata (41 kB)
+Collecting tqdm
+  Downloading tqdm-4.67.3-py3-none-any.whl.metadata (57 kB)
+Collecting torch
+  Using cached https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_amd64.whl.metadata (29 kB)
+Collecting torchvision
+  Using cached https://download.pytorch.org/whl/cpu/torchvision-0.25.0%2Bcpu-cp313-cp313-win_amd64.whl.metadata (5.5 kB)
+Collecting packaging (from clip==1.0)
+  Using cached packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting asgiref<4,>=3.7.0 (from Django==5.0.1)
+  Using cached asgiref-3.11.1-py3-none-any.whl.metadata (9.3 kB)
+Collecting sqlparse>=0.3.1 (from Django==5.0.1)
+  Using cached sqlparse-0.5.5-py3-none-any.whl.metadata (4.7 kB)
+Collecting tzdata (from Django==5.0.1)
+  Using cached tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting pyjwt>=1.7.1 (from djangorestframework-simplejwt==5.5.1)
+  Using cached pyjwt-2.11.0-py3-none-any.whl.metadata (4.0 kB)
+Collecting pyyaml>=5.1 (from drf-yasg==1.21.7)
+  Using cached pyyaml-6.0.3-cp313-cp313-win_amd64.whl.metadata (2.4 kB)
+Collecting inflection>=0.3.1 (from drf-yasg==1.21.7)
+  Using cached inflection-0.5.1-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting pytz>=2021.1 (from drf-yasg==1.21.7)
+  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting uritemplate>=3.0.0 (from drf-yasg==1.21.7)
+  Using cached uritemplate-4.2.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting wcwidth (from ftfy)
+  Downloading wcwidth-0.6.0-py3-none-any.whl.metadata (30 kB)
+Collecting colorama (from tqdm)
+  Using cached https://download.pytorch.org/whl/colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting filelock (from torch)
+  Using cached filelock-3.24.2-py3-none-any.whl.metadata (2.0 kB)
+Collecting typing-extensions>=4.10.0 (from torch)
+  Using cached https://download.pytorch.org/whl/typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting sympy>=1.13.3 (from torch)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx>=2.5.1 (from torch)
+  Using cached networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting jinja2 (from torch)
+  Using cached https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec>=0.8.5 (from torch)
+  Using cached fsspec-2026.2.0-py3-none-any.whl.metadata (10 kB)
+Collecting setuptools (from torch)
+  Using cached setuptools-82.0.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch)
+  Using cached mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch)
+  Using cached markupsafe-3.0.3-cp313-cp313-win_amd64.whl.metadata (2.8 kB)
+Using cached Django-5.0.1-py3-none-any.whl (8.1 MB)
+Using cached djangorestframework-3.16.1-py3-none-any.whl (1.1 MB)
+Using cached djangorestframework_simplejwt-5.5.1-py3-none-any.whl (107 kB)
+Using cached django_cors_headers-4.9.0-py3-none-any.whl (12 kB)
+Using cached drf_yasg-1.21.7-py3-none-any.whl (4.3 MB)
+Using cached gunicorn-23.0.0-py3-none-any.whl (85 kB)
+Using cached python_dotenv-1.2.1-py3-none-any.whl (21 kB)
+Using cached asgiref-3.11.1-py3-none-any.whl (24 kB)
+Using cached pillow-12.1.1-cp313-cp313-win_amd64.whl (7.0 MB)
+Using cached numpy-2.4.2-cp313-cp313-win_amd64.whl (12.3 MB)
+Downloading faiss_cpu-1.13.2-cp313-cp313-win_amd64.whl (18.9 MB)
+   ---------------------------------------- 18.9/18.9 MB 5.6 MB/s  0:00:03
+Downloading ftfy-6.3.1-py3-none-any.whl (44 kB)
+Downloading regex-2026.1.15-cp313-cp313-win_amd64.whl (277 kB)
+Downloading tqdm-4.67.3-py3-none-any.whl (78 kB)
+Using cached https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_amd64.whl (113.7 MB)
+Using cached https://download.pytorch.org/whl/cpu/torchvision-0.25.0%2Bcpu-cp313-cp313-win_amd64.whl (4.3 MB)
+Using cached fsspec-2026.2.0-py3-none-any.whl (202 kB)
+Using cached inflection-0.5.1-py2.py3-none-any.whl (9.5 kB)
+Using cached networkx-3.6.1-py3-none-any.whl (2.1 MB)
+Using cached packaging-26.0-py3-none-any.whl (74 kB)
+Using cached pyjwt-2.11.0-py3-none-any.whl (28 kB)
+Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Using cached pyyaml-6.0.3-cp313-cp313-win_amd64.whl (154 kB)
+Using cached sqlparse-0.5.5-py3-none-any.whl (46 kB)
+Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Using cached https://download.pytorch.org/whl/typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Using cached uritemplate-4.2.0-py3-none-any.whl (11 kB)
+Using cached filelock-3.24.2-py3-none-any.whl (24 kB)
+Using cached https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached markupsafe-3.0.3-cp313-cp313-win_amd64.whl (15 kB)
+Using cached setuptools-82.0.0-py3-none-any.whl (1.0 MB)
+Using cached tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Downloading wcwidth-0.6.0-py3-none-any.whl (94 kB)
+Building wheels for collected packages: clip
+  Building wheel for clip (pyproject.toml): started
+  Building wheel for clip (pyproject.toml): finished with status 'done'
+  Created wheel for clip: filename=clip-1.0-py3-none-any.whl size=1369632 sha256=30fb1ce1e8e79e456f09a60028f89f70086b6e0e149cc4f8a6cfdc64b92eaf56
+  Stored in directory: C:\Users\Vijay\AppData\Local\Temp\pip-ephem-wheel-cache-oqkvaq7b\wheels\cb\a8\74\5f32d6cf0407457f0f62737b6da5c14eb86b9cac476fdf630d
+Successfully built clip
+Installing collected packages: pytz, mpmath, wcwidth, uritemplate, tzdata, typing-extensions, sympy, sqlparse, setuptools, regex, pyyaml, python-dotenv, pyjwt, Pillow, packaging, numpy, networkx, MarkupSafe, inflection, fsspec, filelock, colorama, asgiref, tqdm, jinja2, gunicorn, ftfy, faiss-cpu, Django, torch, djangorestframework, django-cors-headers, torchvision, drf-yasg, djangorestframework-simplejwt, clip
+
+Successfully installed Django-5.0.1 MarkupSafe-3.0.3 Pillow-12.1.1 asgiref-3.11.1 clip-1.0 colorama-0.4.6 django-cors-headers-4.9.0 djangorestframework-3.16.1 djangorestframework-simplejwt-5.5.1 drf-yasg-1.21.7 faiss-cpu-1.13.2 filelock-3.24.2 fsspec-2026.2.0 ftfy-6.3.1 gunicorn-23.0.0 inflection-0.5.1 jinja2-3.1.6 mpmath-1.3.0 networkx-3.6.1 numpy-2.4.2 packaging-26.0 pyjwt-2.11.0 python-dotenv-1.2.1 pytz-2025.2 pyyaml-6.0.3 regex-2026.1.15 setuptools-82.0.0 sqlparse-0.5.5 sympy-1.14.0 torch-2.10.0+cpu torchvision-0.25.0+cpu tqdm-4.67.3 typing-extensions-4.15.0 tzdata-2025.3 uritemplate-4.2.0 wcwidth-0.6.0
+
+[notice] A new release of pip is available: 25.2 -> 26.0.1
+[notice] To update, run: d:\CBIR FINAL PROJECT\cbir_venv\Scripts\python.exe -m pip install --upgrade pip

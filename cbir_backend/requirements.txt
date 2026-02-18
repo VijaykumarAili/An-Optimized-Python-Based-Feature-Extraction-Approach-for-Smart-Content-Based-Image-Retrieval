@@ -1,0 +1,22 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+Django==5.0.1
+djangorestframework==3.16.1
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.9.0
+drf-yasg==1.21.7
+
+gunicorn==23.0.0
+python-dotenv==1.2.1
+
+Pillow==12.1.0
+numpy==1.26.4
+faiss-cpu==1.13.2
+ftfy==6.3.1
+regex==2025.11.3
+tqdm==4.67.1
+
+torch==2.1.2+cpu
+torchvision==0.16.2+cpu
+
+git+https://github.com/openai/CLIP.git
