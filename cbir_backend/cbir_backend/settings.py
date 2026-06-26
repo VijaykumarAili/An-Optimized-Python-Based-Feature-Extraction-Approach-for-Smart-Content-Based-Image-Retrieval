@@ -25,10 +25,15 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get(
         "ALLOWED_HOSTS",
-        "content-based-image-retrieval-sysytem.onrender.com,localhost,127.0.0.1,visionfind-backend.onrender.com"
+        "localhost,127.0.0.1"
     ).split(",")
     if host.strip()
 ]
+
+# Automatically allow Render host if running on Render
+render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
 
 # ==================================================
 # APPLICATIONS
