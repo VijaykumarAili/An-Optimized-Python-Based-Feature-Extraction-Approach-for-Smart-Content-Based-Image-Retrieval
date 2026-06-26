@@ -167,8 +167,12 @@ SIMPLE_JWT = {
 # CORS (🔥 THIS FIXES YOUR ERROR)
 # ==================================================
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://content-based-image-retrieval-system-zmky-dpwfh49vs.vercel.app",
+    origin.strip()
+    for origin in os.environ.get(
+        "CORS_ALLOWED_ORIGINS",
+        "http://localhost:5173,https://content-based-image-retrieval-system-zmky-dpwfh49vs.vercel.app"
+    ).split(",")
+    if origin.strip()
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -196,8 +200,19 @@ CORS_ALLOW_METHODS = [
 # CSRF (🔥 REQUIRED FOR POST FROM VERCEL)
 # ==================================================
 CSRF_TRUSTED_ORIGINS = [
-    "https://content-based-image-retrieval-system-zmky-dpwfh49vs.vercel.app",
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://content-based-image-retrieval-system-zmky-dpwfh49vs.vercel.app"
+    ).split(",")
+    if origin.strip()
 ]
+
+# Dynamically add CORS allowed origins to CSRF trusted origins
+for origin in CORS_ALLOWED_ORIGINS:
+    if origin.startswith("http://") or origin.startswith("https://"):
+        if origin not in CSRF_TRUSTED_ORIGINS:
+            CSRF_TRUSTED_ORIGINS.append(origin)
 
 # ==================================================
 # SWAGGER
