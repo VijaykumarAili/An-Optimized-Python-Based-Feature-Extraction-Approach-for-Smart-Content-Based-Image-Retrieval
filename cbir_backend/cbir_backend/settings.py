@@ -22,9 +22,12 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = [
-    "content-based-image-retrieval-sysytem.onrender.com",
-    "localhost",
-    "127.0.0.1",
+    host.strip()
+    for host in os.environ.get(
+        "ALLOWED_HOSTS",
+        "content-based-image-retrieval-sysytem.onrender.com,localhost,127.0.0.1,visionfind-backend.onrender.com"
+    ).split(",")
+    if host.strip()
 ]
 
 # ==================================================
