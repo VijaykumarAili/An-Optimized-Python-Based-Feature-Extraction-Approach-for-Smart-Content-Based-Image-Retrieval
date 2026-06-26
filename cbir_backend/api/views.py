@@ -69,7 +69,7 @@ class ImageListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        print(f"📸 Listing images for: {user.username} (role={getattr(user, 'role', '')}, staff={user.is_staff}, super={user.is_superuser})")
+        print(f"Listing images for: {user.username} (role={getattr(user, 'role', '')}, staff={user.is_staff}, super={user.is_superuser})")
 
         # ✅ Allow admins/staff/custom-role admins to see all images
         if getattr(user, "is_superuser", False) or getattr(user, "is_staff", False) or getattr(user, "role", "") == "admin":

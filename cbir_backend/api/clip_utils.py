@@ -20,7 +20,7 @@ def _detect_device() -> str:
     """Detect the execution device and log it."""
     device = "cuda" if torch.cuda.is_available() else "cpu"
     gpu_name = torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU only"
-    print(f"🚀 Using device: {device.upper()} ({gpu_name})")
+    logger.info("Using device: %s (%s)", device.upper(), gpu_name)
     if torch.cuda.is_available():
         logger.info("CLIP configured to use GPU: %s", gpu_name)
     else:
