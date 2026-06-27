@@ -1,9 +1,9 @@
 import io
 import json
 import logging
+import os
 from typing import Tuple
 
-import clip
 import numpy as np
 import torch
 from PIL import Image
@@ -11,8 +11,11 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 logger = logging.getLogger(__name__)
 
-_clip_model = None
-_clip_preprocess = None
+# Detect if running on Render Free Tier (memory limit: 512MB)
+IS_RENDER = os.environ.get("RENDER") == "true"
+
+_model = None
+_preprocess = None
 _device = None
 
 
@@ -21,12 +24,7 @@ def _detect_device() -> str:
     device = "cuda" if torch.cuda.is_available() else "cpu"
     gpu_name = torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU only"
     logger.info("Using device: %s (%s)", device.upper(), gpu_name)
-    if torch.cuda.is_available():
-        logger.info("CLIP configured to use GPU: %s", gpu_name)
-    else:
-        logger.info("CLIP configured to use CPU")
     return device
-
 
 
 def get_device() -> str:
@@ -37,19 +35,64 @@ def get_device() -> str:
     return _device
 
 
+if IS_RENDER:
+    # -------------------------------------------------------------------------
+    # ⚡ LIGHTWEIGHT RESNET-18 (For Render Free Tier <512MB RAM)
+    # -------------------------------------------------------------------------
+    import torchvision.models as models
+    import torchvision.transforms as transforms
 
-def load_clip_model() -> Tuple[torch.nn.Module, clip.model.CLIP]:
-    """Load the CLIP ViT-B/32 model on the detected device."""
-    global _clip_model, _clip_preprocess
-    if _clip_model is None or _clip_preprocess is None:
-        device = get_device()
-        _clip_model, _clip_preprocess = clip.load("ViT-B/32", device=device)
-        _clip_model.eval()
-        if device == "cuda":
-            logger.info("Loaded CLIP ViT-B/32 model on GPU")
-        else:
-            logger.info("Loaded CLIP ViT-B/32 model on CPU")
-    return _clip_model, _clip_preprocess
+    class ResNet18Extractor(torch.nn.Module):
+        """ResNet-18 feature extractor that outputs 512-dimensional normalized vectors."""
+        def __init__(self):
+            super().__init__()
+            resnet = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
+            # Remove the final classification layer (fc)
+            self.features = torch.nn.Sequential(*list(resnet.children())[:-1])
+            self.features.eval()
+
+        def forward(self, x):
+            with torch.no_grad():
+                out = self.features(x)
+                out = torch.flatten(out, 1)  # Flatten to [batch, 512]
+                out = out / out.norm(dim=-1, keepdim=True)  # Normalize
+                return out
+
+    def load_clip_model():
+        """Load lightweight ResNet-18 model on Render."""
+        global _model, _preprocess
+        if _model is None or _preprocess is None:
+            logger.info("Render platform detected. Loading lightweight ResNet-18 model (~45MB) to prevent Out-Of-Memory crashes...")
+            _model = ResNet18Extractor().to(get_device())
+            _preprocess = transforms.Compose([
+                transforms.Resize(256),
+                transforms.CenterCrop(224),
+                transforms.ToTensor(),
+                transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225]
+                )
+            ])
+        return _model, _preprocess
+
+else:
+    # -------------------------------------------------------------------------
+    # 🧠 STANDARD OPENAI CLIP (For local development / high performance)
+    # -------------------------------------------------------------------------
+    import clip
+
+    def load_clip_model() -> Tuple[torch.nn.Module, clip.model.CLIP]:
+        """Load the CLIP ViT-B/32 model on the detected device."""
+        global _model, _preprocess
+        if _model is None or _preprocess is None:
+            device = get_device()
+            _model, _preprocess = clip.load("ViT-B/32", device=device)
+            _model.eval()
+            if device == "cuda":
+                logger.info("Loaded CLIP ViT-B/32 model on GPU")
+            else:
+                logger.info("Loaded CLIP ViT-B/32 model on CPU")
+        return _model, _preprocess
 
 
 def _prepare_image(image_file) -> Image.Image:
@@ -68,7 +111,7 @@ def _prepare_image(image_file) -> Image.Image:
 
 
 def extract_features(image_file) -> np.ndarray:
-    """Extract normalized CLIP features for the supplied image."""
+    """Extract normalized features for the supplied image."""
     model, preprocess = load_clip_model()
     device = get_device()
 
@@ -76,8 +119,12 @@ def extract_features(image_file) -> np.ndarray:
     image_tensor = preprocess(image).unsqueeze(0).to(device)
 
     with torch.no_grad():
-        features = model.encode_image(image_tensor)
-        features = features / features.norm(dim=-1, keepdim=True)
+        if IS_RENDER:
+            # ResNet-18 custom extractor module handles norm internally
+            features = model(image_tensor)
+        else:
+            features = model.encode_image(image_tensor)
+            features = features / features.norm(dim=-1, keepdim=True)
 
     return features.detach().cpu().numpy().astype(np.float32).flatten()
 
