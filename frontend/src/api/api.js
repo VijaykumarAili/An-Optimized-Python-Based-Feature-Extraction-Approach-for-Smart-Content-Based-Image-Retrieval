@@ -45,9 +45,9 @@ api.interceptors.response.use(
     if (error.response) {
       if (error.response.status === 401) {
         console.error('🚫 Unauthorized – token expired or invalid')
-        // Optional auto logout:
-        // localStorage.clear()
-        // window.location.href = '/login'
+        localStorage.removeItem('access')
+        localStorage.removeItem('refresh')
+        window.location.href = '/login'
       }
     }
     return Promise.reject(error)
