@@ -55,6 +55,8 @@ class ImageUploadView(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             return Response({'error': f'Error processing image: {str(e)}'},
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -175,6 +177,8 @@ def search_view(request):
         return Response({"results": all_results, "count": len(all_results)})
 
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return Response({'error': f'Error during search: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # =====================================================================
